@@ -269,23 +269,12 @@ class Box(object):
         # IMPORTANT: Write a solution to this problem in pseudo-code,
         # and THEN translate the pseudo-code to a solution.
         # --------------------------------------------------------------
-        #
-        # Returns the portion (if any) of this Box's contents that had to be
-        # discarded to make the contents fit within the new volume
-        # (or the empty string if this Box's contents fit within
-        # the new volume)
-        # Side effects:
-        # self.volume = new_volume
-        # extras = len(self.contents) - new_volume
-        # for k in range(new_volume):
-        #    return
-        #
-        # self.contents = self.contents - extras
-        # self.append_string(self.contents)
-        # -- Sets this Box's volume to the given new_volume.
-        # -- If the new volume is less than the length of this Box's
-        # contents, sets this Box's contents to what it was
-        # but "clipped" to fit in this Box
+        diff_vol = self.volume - new_volume
+        self.volume = new_volume
+        diff_cont = ''
+        for k in range(diff_vol, 0, -1):
+            diff_cont = diff_cont + self.contents[k]
+        return diff_cont
 
     def double_then_shrink(self, new_volume):
         """
