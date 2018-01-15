@@ -269,12 +269,13 @@ class Box(object):
         # IMPORTANT: Write a solution to this problem in pseudo-code,
         # and THEN translate the pseudo-code to a solution.
         # --------------------------------------------------------------
-        diff_vol = self.volume - new_volume
+        delta_vol = self.volume - new_volume
         self.volume = new_volume
-        diff_cont = ''
-        for k in range(diff_vol, 0, -1):
-            diff_cont = diff_cont + self.contents[k]
-        return diff_cont
+
+        new_contents = ''
+        for k in range(self.volume):
+            new_contents = new_contents + self.contents[k]
+        self.contents = new_contents
 
     def double_then_shrink(self, new_volume):
         """
@@ -328,6 +329,8 @@ class Box(object):
         #    DIFFICULTY:      5
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
+        self.double()
+        self.shrink(new_volume)
 
     def reset(self):
         """
